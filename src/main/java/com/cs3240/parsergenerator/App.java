@@ -22,5 +22,9 @@ public class App
     	}
     	
     	System.out.println(output.toString());
+    	
+    	//Testing grammar stuff out.
+    	
+    	Scanner grammarScanner = new Scanner(new File(args[1]));
     }
 }
