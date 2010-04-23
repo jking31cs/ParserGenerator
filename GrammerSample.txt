@@ -1,23 +1,8 @@
-%Tokens BEGIN END SEMICOLON COMMA INTNUM PLUS …
-%Non-terminals <Tiny-program> <statement-list> <statement> …
-%Start <Tiny-program>
+%Tokens NUMBER ID LEFTPAR RIGHTPAR 
+%Non-terminals <lexp> <atom> <lexp-seq> <list> 
+%Start <lexp> 
 %Rules
-<Tiny-program > : BEGIN <statement-list> END
-<statement-list> : <statement-list> <statement> | <statement>
-<statement> : PRINT LEFTPAR <exp-list> RIGHTPAR SEMICOLON
-<statement> : ID ASSIGN <exp> SEMICOLON
-<statement> : READ LEFTPAR <id-list> RIGHTPAR SEMICOLON
-<id-list> : <id-list> COMMA ID | ID
-<exp-list> : <exp-list> COMMA <exp> | <exp>
-<exp> : ID | INTNUM | LEFTPAR <exp> RIGHTPAR | <exp> <bin-op> <exp>
-<bin-op> : PLUS | MINUS | MULTIPLY | MODULO
-where
-LEFTPAR stands for (
-RIGHTPAR stands for )
-ASSIGN stands for :=
-COMMA stands for ,
-SEMICOLON stands for ;
-PLUS stands for +
-MINUS stands for –
-MULTIPLY stands for *
-MODULO stands for %
+<lexp> : <atom> | <list>
+<atom> : NUMBER | ID
+<list> : LEFTPAR <lexp-seq> RIGHTPAR
+<lexp-seq> : <lexp-seq> <lexp> | <lexp>
